@@ -5,7 +5,7 @@ public class JDBCUtil {
  
           
 
-private static final String url="jdbc:mysql://localhost:3306/practice";
+private static final String url="jdbc:mysql://localhost:3306/employee";
 
 private static final String username="root";
 
@@ -21,7 +21,7 @@ public static Connection jdbcConnection()
     }
     catch(Exception e)
     {
-        System.out.println(e.getMessage());
+    e.printStackTrace();
     }
 
     return con;
