@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EmployeeMain {
@@ -7,11 +8,15 @@ public class EmployeeMain {
 
         Scanner sc = new Scanner(System.in);
 
-        while (true) {
+        while (true) 
+            {
             System.out.println("1.Save Employee");
             System.out.println("2.Update Employee");
-            System.out.println("3.Exit");
-            System.out.println("4 Find Employees by ID");
+            System.out.println("3 Find Employees by ID");
+            System.out.println("4.All Employess");
+            System.out.println("5.Delete employee ByID");
+            // System.out.print("delete all employee"); //query truncate table employee
+            System.out.println("6.Exit");
 
             System.out.println("Enter your choice :");
             int choice = sc.nextInt();
@@ -57,23 +62,41 @@ public class EmployeeMain {
                 String dep = sc.nextLine();
 
                 Employee emp = new Employee();
-                emp.setinfo(id, name, salary, dep, gender);
+                emp.setinfo(id, name, salary, gender, dep);
                 String msg = controller.updateEmployee(emp);
                 System.out.println(msg);
             }
 
             else if (choice == 3) {
-                System.out.println("thank you");
-                break;
+                System.out.println("Enter the Employee ID :");
+                int id = sc.nextInt();
+                String msg = controller.getemployebyId(id);
+                System.out.println(msg);
+
             }
 
             else if (choice == 4) {
-                System.out.println("Enter the Employee ID :");
-                int id=sc.nextInt();
-                String msg = controller.getemployebyId(id);
-                System.out.println(msg);
-                
+                ArrayList<Employee> employees = controller.getAllEmployees();
 
+                for (Employee employee : employees) {
+                    System.out.println("ID      :" + employee.getid());
+                    System.out.println("Name    :" + employee.getname());
+                    System.out.println("Dep     :" + employee.getdep());
+                    System.out.println("Gender  :" + employee.getgender());
+                    System.out.println("Salary  :" + employee.getsalary());
+
+                    System.out.println("----------------------------------");
+                }
+            } else if (choice == 5) {
+                System.out.println("Enter Id to delete Employee");
+                int id = sc.nextInt();
+                String msg = controller.delete(id);
+                System.out.println(msg);
+            }
+
+            else if (choice == 6) {
+                System.out.println("thank you");
+                break;
             }
 
             else {

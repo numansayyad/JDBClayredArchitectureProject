@@ -3,15 +3,17 @@ public class Employee {
     private int id;
     private String name;
     private double salary;
-    private String dep;
-    private String gender;
+        private String gender;
 
-    public void setinfo(int id,String name,double salary,String dep,String gender ){
+    private String dep;
+
+    public void setinfo(int id,String name,double salary,String gender,String dep ){
         this.id=id;
         this.name=name;
         this.salary=salary;
-        this.dep=dep;
         this.gender=gender;
+                this.dep=dep;
+
     }
 
     int getid(){

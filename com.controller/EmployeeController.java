@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class EmployeeController {
     EmployeService service = new EmployeService();
     public String saveEmployee(Employee employee){
@@ -13,4 +15,17 @@ public class EmployeeController {
        String msg =service.getemployebyId(id);
        return msg;
     }
+    public ArrayList<Employee> getAllEmployees()
+{
+    ArrayList<Employee> employees = service.getAllEmployees();
+
+    return employees;
+}
+public String delete(int id)
+{
+    String msg = service.delete(id);
+
+    return msg;
+}
+
 }
