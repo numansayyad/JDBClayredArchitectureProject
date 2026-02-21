@@ -12,7 +12,7 @@ public class Employee {
         this.name=name;
         this.salary=salary;
         this.gender=gender;
-                this.dep=dep;
+            this.dep=dep;
 
     }
 
@@ -25,12 +25,13 @@ public class Employee {
     double getsalary(){
         return salary;
     }
-    String getdep(){
-        return dep;
-    }
     String getgender(){
         return gender;
     }
+    String getdep(){
+        return dep;
+    }
+    
 
 
 //  public static void main(String[] args) {

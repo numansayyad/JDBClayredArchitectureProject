@@ -14,6 +14,7 @@ public class EmployeeDao {
     // create a method to insert data in DB table
 
     public String saveEmployee(Employee employee) {
+        
         try {
             PreparedStatement pst = con.prepareStatement("insert into employees values(?,?,?,?,?) ");// query parameter
             pst.setInt(1, employee.getid());
@@ -118,44 +119,144 @@ public class EmployeeDao {
                 String dep = rs.getString("dep");
 
                 Employee employee = new Employee();
-                employee.setinfo(id, name, salary,  gender,dep);
+                employee.setinfo(id, name, salary, gender, dep);
 
                 employees.add(employee);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return employees;
 
     }
-//deleteEmployeeById
+    // deleteEmployeeById
 
-public String deleteById(int id)
-{
-    try {
-        PreparedStatement pst = con.prepareStatement("delete from employees where id=?");
-        pst.setInt(1, id);
+    public String deleteById(int id) {
+        try {
+            PreparedStatement pst = con.prepareStatement("delete from employees where id=?");
+            pst.setInt(1, id);
 
-       //return 1-if emp will deleted
-       //return 0 - if emp will not deleted
+            // return 1-if emp will deleted
+            // return 0 - if emp will not deleted
 
-       int  value =pst.executeUpdate();
-       if(value>0)//0 means false ahe because  int return type return 0 for false and true for 1
-       {
-        return"employee deleted successfully";
-       }
-       else
-       {
+            int value = pst.executeUpdate();
+            if (value > 0)// 0 means false ahe because int return type return 0 for false and true for 1
+            {
+                return "employee deleted successfully";
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
-       }
     }
-    catch(Exception e)
-    {
-        e.printStackTrace();
-    }
-    return null;
 
-}
+    // public ArrayList<Employee> displaymale(Employee employee){
+    // try{
+    // PreparedStatement male= con.prepareStatement("select*from employees where
+    // gender=?");
+    // ResultSet sc= male.executeQuery();
+
+    // ArrayList<Employee> employees = new ArrayList<Employee>();
+    // for(Employee hs:employees){
+    // if(hs.getgender().equals("Male")){
+    // System.out.println("some male emp present in database base");
+    // }
+    // else{
+    // System.out.println("employee not present in ");
+    // }
+
+    // }
+
+    // }
+    // catch(Exception e){
+    // e.printStackTrace();
+    // }
+
+    public ArrayList<Employee> displayMale() {
+
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        try {
+            PreparedStatement male = con.prepareStatement(
+                    "select * from employees where gender=?");
+
+            male.setString(1, "male");
+
+            ResultSet rs = male.executeQuery();
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String name = rs.getString("ename");
+                double salary = rs.getDouble("salary");
+                String gender = rs.getString("gender");
+                String dep = rs.getString("dep");
+
+                if (gender.equals("male")) { // ✔ equals use kela
+
+                    Employee emp = new Employee();
+                    emp.setinfo(id, name, salary, dep, gender);
+
+                    employees.add(emp);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return employees;
+    }
+
+    public String deleteemp(){
+        try{
+        PreparedStatement st=con.prepareStatement("truncate table employees");
+      int dt=st.executeUpdate(); 
+
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return "all employee deleted successfully";
+    }
+  public ArrayList<Employee> displayFemale() {
+
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        try {
+            PreparedStatement male = con.prepareStatement(
+                    "select * from employees where gender=?");
+
+            male.setString(1, "female");
+
+            ResultSet rs = male.executeQuery();
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String name = rs.getString("ename");
+                double salary = rs.getDouble("salary");
+                String gender = rs.getString("gender");
+                String dep = rs.getString("dep");
+
+                if (gender.equals("female")) { // ✔ equals method
+
+                    Employee emp = new Employee();
+                    emp.setinfo(id, name, salary, dep, gender);
+
+                    employees.add(emp);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return employees;
+    }
+
 
 }

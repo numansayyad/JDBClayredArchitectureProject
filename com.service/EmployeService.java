@@ -35,4 +35,20 @@ public String delete(int id)
     return msg;
 }
 
+
+public  ArrayList<Employee> displayMale(){
+ ArrayList<Employee> employees=  dao.displayMale();
+ return employees;
+}
+
+public  ArrayList<Employee> displayFemale(){
+ ArrayList<Employee> employees=  dao.displayFemale();
+ return employees;
+}
+
+public String deleteemp(){
+  String msg= dao.deleteemp();
+  return msg;
+}
+
 }
